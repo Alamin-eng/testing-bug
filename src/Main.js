@@ -24,7 +24,11 @@ import {
   HStack,
 } from "@chakra-ui/react";
 
-const cryptoURL = "http://localhost:3001/";
+ const cryptoURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false";
+ 
+// const cryptoURL = "http://localhost:3001/";
+// "start": "node ./server/server.js & react-scripts start",
+
 const exchangeRateURL = "https://open.er-api.com/v6/latest/USD";
 
 export default function Main() {
