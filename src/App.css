@@ -51,4 +51,47 @@
   .grid-text {
     flex-direction: column;
   }
+  .text-container{
+    margin-top: -7%;
+    font-size: .75rem;
+    color:rgb(9, 65, 2);
+    
+  }
+   
+}
+
+/* slide text */
+.auto-text-slider {
+  overflow: hidden;
+  margin: 5%;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap:4%;
+  animation: scroll-text linear infinite;
+ 
+  
+}
+
+.text-item {
+  opacity: 0;
+  transition: opacity 0.5s;
+  
+}
+
+.text-item.active {
+  opacity: 1;
+}
+
+@keyframes scroll-text {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-100%);
+  }
 }

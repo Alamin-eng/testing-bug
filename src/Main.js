@@ -24,8 +24,10 @@ import {
   HStack,
 } from "@chakra-ui/react";
 
+import { motion } from "framer-motion";
+
  const cryptoURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false";
- 
+
 // const cryptoURL = "http://localhost:3001/";
 // "start": "node ./server/server.js & react-scripts start",
 
@@ -34,6 +36,24 @@ const exchangeRateURL = "https://open.er-api.com/v6/latest/USD";
 export default function Main() {
   const [data, setData] = useState([]);
   const [pound, setPound] = useState([]);
+
+  // framer motion scroll
+  const variants = {
+    offscreen: {
+      opacity: 0.2,
+      y: 50,
+    },
+    onscreen: {
+      opacity: 1,
+      y: 10,
+      transition: {
+        type: "spring",
+        bounce: 0.1,
+
+        duration: 0.8,
+      },
+    },
+  };
 
   // Chakra responsive state
   const isSmallScreen = useBreakpointValue({ base: true, md: false });
@@ -76,141 +96,171 @@ export default function Main() {
 
         {data.map((el, index) => {
           return (
-            <Card
-              direction={{ base: "column", sm: "row" }}
-              overflow="hidden"
-              variant="outline"
-              mt={2}
-              p={1}
-              bgGradient="linear(to-t,gray.50, teal.50, orange.50)"
-              key={index}
+            <motion.div
+              initial="offscreen"
+              whileInView="onscreen"
+              viewport={{ once: true, amount: 0.8 }}
+              variants={variants}
             >
-              <HStack ml={2}>
-                <Tag size="xs" borderRadius="full" m={3} width={40}>
-                  <Avatar src={`${el.image}`} size="md" name="crypto" m={1} />
-                  <TagLabel ml={1} p={2}>
-                    {el.symbol} GBP
-                  </TagLabel>
-                </Tag>
-              </HStack>
+              <Card
+                direction={{ base: "column", sm: "row" }}
+                overflow="hidden"
+                variant="outline"
+                mt={2}
+                p={1}
+                bgGradient="linear(to-t,gray.50, teal.50, orange.50)"
+                key={index}
+              >
+                <HStack ml={2}>
+                  <Tag size="xs" borderRadius="full" m={3} width={40}>
+                    <Avatar src={`${el.image}`} size="md" name="crypto" m={1} />
+                    <TagLabel ml={1} p={2}>
+                      {el.symbol} GBP
+                    </TagLabel>
+                  </Tag>
+                </HStack>
 
-              <Stack direction="row">
-                <CardBody>
-                  <Grid
-                    templateColumns="repeat(2, 1fr)"
-                    gap={5}
-                    justifyItems="flex-start"
-                  >
-                    <GridItem colSpan={1} p={1}>
-                      <Box ml="1">
-                        <Text fontWeight="bold" gap={1}>
-                          {el.name}
-                        </Text>
-                        <SkeletonCircle
-                          size=""
-                          startColor="purple.600"
-                          endColor="orange.500"
-                          height="6px"
-                          m={1.5}
+                <Stack direction="row">
+                  <CardBody>
+                    <Grid
+                      templateColumns="repeat(2, 1fr)"
+                      templateRows="1fr 60px"
+                      gap={5}
+                      justifyItems="flex-start"
+                    >
+                      <GridItem colSpan={1} p={1}>
+                        <Box ml="1">
+                          <Text fontWeight="bold" gap={1}>
+                            {el.name}
+                          </Text>
+                          <SkeletonCircle
+                            size=""
+                            startColor="purple.600"
+                            endColor="orange.500"
+                            height="6px"
+                            m={1.5}
+                            ml={-1}
+                          />
+                          <Text
+                            fontSize="lg"
+                            color="darkred"
+                            mr={1}
+                            mt={1}
+                            pr={1}
+                            pt={1}
+                            pb={1}
+                          >
+                            £{Number(el.current_price * pound).toFixed(7)}
+                          </Text>
+                        </Box>
+                      </GridItem>
+
+                      <GridItem colSpan={1} m={1} p={1}>
+                        <Badge colorScheme="green" ml={-1}>
+                          RANK {el.market_cap_rank}
+                        </Badge>
+
+                        <hr
+                          style={{
+                            backgroundColor: "orange",
+                            height: "1.75px",
+                            marginLeft: "-5px",
+                          }}
+                        ></hr>
+                        <StatGroup
+                          gap={isSmallScreen ? "3" : "6"}
+                          mt={2}
                           ml={-1}
-                        />
-                        <Text
-                          fontSize="lg"
-                          color="darkred"
-                          mr={1}
-                          mt={1}
-                          pr={1}
-                          pt={1}
-                          pb={1}
+                          mb={2}
                         >
-                          £{Number(el.current_price * pound).toFixed(7)}
-                        </Text>
-                      </Box>
-                    </GridItem>
+                          <Stat
+                            mt={-1}
+                            mb={-1}
+                            p={1}
+                            bg="purple.200"
+                            textAlign="center"
+                            className="rounded"
+                          >
+                            <StatLabel borderRadius="sm">Total_vol</StatLabel>
 
-                    <GridItem colSpan={1} m={1} p={1}>
-                      <Badge colorScheme="green" ml={-1}>
-                        RANK {el.market_cap_rank}
-                      </Badge>
+                            <StatNumber fontSize="xs">
+                              {el.total_volume}
+                            </StatNumber>
+                          </Stat>
+                          <Stat
+                            mt={-1}
+                            mb={-1}
+                            bg="blue.100"
+                            textAlign="center"
+                            className="rounded"
+                          >
+                            <StatLabel borderRadius="sm">
+                              Changes <br></br>
+                            </StatLabel>
 
-                      <hr
-                        style={{
-                          backgroundColor: "orange",
-                          height: "1.75px",
-                          marginLeft: "-5px",
-                        }}
-                      ></hr>
-                      <StatGroup
-                        gap={isSmallScreen ? "3" : "6"}
-                        mt={2}
-                        ml={-1}
-                        mb={2}
-                      >
-                        <Stat
-                          mt={-1}
-                          mb={-1}
-                          p={1}
-                          bg="purple.200"
-                          textAlign="center"
-                          className="rounded"
-                        >
-                          <StatLabel borderRadius="sm">Total_vol</StatLabel>
+                            <StatNumber fontSize="xs">
+                              {el.price_change_percentage_24h}%
+                            </StatNumber>
+                          </Stat>
+                          <Stat
+                            mt={-1}
+                            mb={-1}
+                            bg="red.100"
+                            textAlign="center"
+                            className="rounded"
+                          >
+                            <StatLabel borderRadius="sm">
+                              High 24hrs <br></br>
+                            </StatLabel>
+                            <StatNumber fontSize="xs">
+                              £{el.high_24h} <StatArrow type="increase" />
+                            </StatNumber>
+                          </Stat>
+                          <Stat
+                            mt={-1}
+                            mb={-1}
+                            bg="yellow.100"
+                            textAlign="center"
+                            className="rounded"
+                          >
+                            <StatLabel borderRadius="sm">
+                              Low 24hrs<br></br>
+                            </StatLabel>
+                            <StatNumber fontSize="xs">
+                              £{el.low_24h} <StatArrow type="decrease" />
+                            </StatNumber>
+                          </Stat>
+                        </StatGroup>
+                      </GridItem>
+                      <GridItem rowStart={2} colStart={1} colEnd={3} p={1}>
+                        <div className="text-container">
+                          <div>
+                            Change 24hrs <Divider />£
+                            {Number(el.price_change_24h).toFixed(2)}
+                          </div>
+                          <div>
+                            Change % 24hrs <Divider />
+                            {Number(el.price_change_percentage_24h).toFixed(
+                              2
+                            )}%{" "}
+                          </div>
+                          <div>
+                            All time high
+                            <Divider /> £{Number(el.ath * pound).toFixed(5)}
+                          </div>
+                          <div>
+                            All time change <Divider />
+                            {Number(el.ath_change_percentage).toFixed(2)}%
+                          </div>
+                        </div>
+                      </GridItem>
+                    </Grid>
+                  </CardBody>
 
-                          <StatNumber fontSize="xs">
-                            {el.total_volume}
-                          </StatNumber>
-                        </Stat>
-                        <Stat
-                          mt={-1}
-                          mb={-1}
-                          bg="blue.100"
-                          textAlign="center"
-                          className="rounded"
-                        >
-                          <StatLabel borderRadius="sm">
-                            Changes <br></br>
-                          </StatLabel>
-
-                          <StatNumber fontSize="xs">
-                            {el.price_change_percentage_24h}%
-                          </StatNumber>
-                        </Stat>
-                        <Stat
-                          mt={-1}
-                          mb={-1}
-                          bg="red.100"
-                          textAlign="center"
-                          className="rounded"
-                        >
-                          <StatLabel borderRadius="sm">
-                            High <br></br>
-                          </StatLabel>
-                          <StatNumber fontSize="xs">
-                            £{el.high_24h} <StatArrow type="increase" />
-                          </StatNumber>
-                        </Stat>
-                        <Stat
-                          mt={-1}
-                          mb={-1}
-                          bg="yellow.100"
-                          textAlign="center"
-                          className="rounded"
-                        >
-                          <StatLabel borderRadius="sm">
-                            Low<br></br>
-                          </StatLabel>
-                          <StatNumber fontSize="xs">
-                            £{el.low_24h} <StatArrow type="decrease" />
-                          </StatNumber>
-                        </Stat>
-                      </StatGroup>
-                    </GridItem>
-                  </Grid>
-                </CardBody>
-
-                <CardFooter> </CardFooter>
-              </Stack>
-            </Card>
+                  <CardFooter> </CardFooter>
+                </Stack>
+              </Card>
+            </motion.div>
           );
         })}
       </main>
@@ -218,4 +268,6 @@ export default function Main() {
   );
 }
 
-// add an animated info at the right empty space of each cards using another gridItem , don't use card footer
+//put the the rowed grid for each card items in a seperate component then put back in here using props, use stat from chakra,don't use card footer, Try to find a slide animation for the row grid.
+// Add footer
+// make it nicer with animated navbar from react-framer motion
