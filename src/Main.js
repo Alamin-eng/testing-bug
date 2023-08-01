@@ -26,7 +26,7 @@ import {
 
 import { motion } from "framer-motion";
 
- const cryptoURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false";
+const cryptoURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false";
 
 // const cryptoURL = "http://localhost:3001/";
 // "start": "node ./server/server.js & react-scripts start",
@@ -40,15 +40,15 @@ export default function Main() {
   // framer motion scroll
   const variants = {
     offscreen: {
-      opacity: 0.2,
-      y: 50,
+      opacity: 0.5,
+      y: 40,
     },
     onscreen: {
       opacity: 1,
       y: 10,
       transition: {
         type: "spring",
-        bounce: 0.1,
+        bounce: 0.2,
 
         duration: 0.8,
       },
@@ -111,9 +111,20 @@ export default function Main() {
                 bgGradient="linear(to-t,gray.50, teal.50, orange.50)"
                 key={index}
               >
-                <HStack ml={2}>
-                  <Tag size="xs" borderRadius="full" m={3} width={40}>
-                    <Avatar src={`${el.image}`} size="md" name="crypto" m={1} />
+                <HStack ml={1} p={1}>
+                  <Tag
+                    size="xs"
+                    borderRadius="full"
+                    m={2}
+                    width={isSmallScreen ? "45vw" : "15vw"}
+                  >
+                    <Avatar
+                      src={`${el.image}`}
+                      size="md"
+                      name="crypto"
+                      m={2}
+                      p={1}
+                    />
                     <TagLabel ml={1} p={2}>
                       {el.symbol} GBP
                     </TagLabel>
@@ -123,7 +134,7 @@ export default function Main() {
                 <Stack direction="row">
                   <CardBody>
                     <Grid
-                      templateColumns="repeat(2, 1fr)"
+                      templateColumns="repeat(3, 1fr)"
                       templateRows="1fr 60px"
                       gap={5}
                       justifyItems="flex-start"
@@ -155,7 +166,16 @@ export default function Main() {
                         </Box>
                       </GridItem>
 
-                      <GridItem colSpan={1} m={1} p={1}>
+                      <GridItem
+                        colStart={3}
+                        colEnd={4}
+
+                        p={2}
+                        border="1px"
+                        borderColor="gray.300"
+                        width="35vw"
+                        ml={4}
+                      >
                         <Badge colorScheme="green" ml={-1}>
                           RANK {el.market_cap_rank}
                         </Badge>
@@ -168,10 +188,10 @@ export default function Main() {
                           }}
                         ></hr>
                         <StatGroup
-                          gap={isSmallScreen ? "3" : "6"}
+                          gap={isSmallScreen ? "3" : "7"}
                           mt={2}
-                          ml={-1}
-                          mb={2}
+                          mb={1}
+                          
                         >
                           <Stat
                             mt={-1}
@@ -232,14 +252,25 @@ export default function Main() {
                           </Stat>
                         </StatGroup>
                       </GridItem>
-                      <GridItem rowStart={2} colStart={1} colEnd={3} p={1}>
+
+                      <GridItem
+                        rowStart={2}
+                        colStart={isSmallScreen ? 1 : 2}
+                        colEnd={4}
+                        p={1}
+                        m={1}
+                        mt={isSmallScreen ? 1 : -3}
+                        fontSize={isSmallScreen ? ".75rem" : ".85rem"}
+                        borderTop="1px"
+                        borderTopColor="blue.300"
+                      >
                         <div className="text-container">
                           <div>
                             Change 24hrs <Divider />£
                             {Number(el.price_change_24h).toFixed(2)}
                           </div>
                           <div>
-                            Change % 24hrs <Divider />
+                            Change% 24hrs <Divider />
                             {Number(el.price_change_percentage_24h).toFixed(
                               2
                             )}%{" "}
