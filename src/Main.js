@@ -169,7 +169,6 @@ export default function Main() {
                       <GridItem
                         colStart={3}
                         colEnd={4}
-
                         p={2}
                         border="1px"
                         borderColor="gray.300"
@@ -191,7 +190,6 @@ export default function Main() {
                           gap={isSmallScreen ? "3" : "7"}
                           mt={2}
                           mb={1}
-                          
                         >
                           <Stat
                             mt={-1}
@@ -264,7 +262,10 @@ export default function Main() {
                         borderTop="1px"
                         borderTopColor="blue.300"
                       >
-                        <div className="text-container">
+                        <div
+                          className="text-container"
+                          style={{ gap: isSmallScreen ? "10%" : "25%" }}
+                        >
                           <div>
                             Change 24hrs <Divider />£
                             {Number(el.price_change_24h).toFixed(2)}
