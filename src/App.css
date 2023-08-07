@@ -14,8 +14,7 @@
 
 .App-header>div {
   border: 2px solid goldenrod;
-  background: radial-gradient(ellipse farthest-corner at right bottom, #f7dc64 0%, #FDB931 18%, #f3b93d 40%, #dea726 50%, transparent 80%),
-    radial-gradient(ellipse farthest-corner at left top, #f6cd2a 0%, #f6c53e 18%, #D1B464 30%, #a87f20 53.5%, #9b700b 90%);
+  background: linear-gradient(to right, #BF953F, #f8f0a9, #f5ba55, #f8f0a9, #efae2c);
   padding: 2%;
   border-radius: 5px;
   display: flex;
