@@ -7,13 +7,13 @@ export default function Header() {
     height: "280px",
     p: "10",
     background:
-      "url(https://www.uktech.news/wp-content/uploads/2021/05/Crypto-Terms.jpg) center/cover no-repeat",
+      "url(https://transitnet.io/wp-content/uploads/what-does-title-company-do-crypto.jpg) bottom/cover no-repeat",
   };
 
   return (
     <header>
       <Box sx={outerBoxStyles} className="App-header">
-        <Box filter="auto" brightness="90%">
+        <Box filter="auto" brightness="95%">
           <Text
             bgGradient="linear(to-l, #1221AA, #AE10E0)"
             bgClip="text"
