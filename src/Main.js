@@ -79,7 +79,7 @@ export default function Main() {
   }, []);
 
   return (
-    <Stack spacing={1} bgGradient="linear(gray.100, teal.300, blue.200)">
+    <Stack spacing={1} bgGradient="linear(gray.200, teal.300, blue.200)">
       <main>
         <Box position="relative" padding="10">
           <Divider />

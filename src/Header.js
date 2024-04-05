@@ -22,7 +22,7 @@ export default function Header() {
             filter="auto"
             brightness="75%"
           >
-            <Heading size="2xl">CRYPTO CURRENCY</Heading>
+            <Heading size="2xl">TOP 100 CRYPTO</Heading>
           </Text>
           <div className="line"></div>
           <Text size="xs">Worldwide update</Text>{" "}
