@@ -81,13 +81,12 @@ export default function Main() {
   return (
     <Stack spacing={1} bgGradient="linear(gray.200, teal.300, blue.200)">
       <main>
-        <Box position="relative" padding="10">
-          <Divider />
-
+        <Box position="relative" padding="10" background="blue.700">
+         
           <AbsoluteCenter
-            color="green.700"
+            color="yellow.300"
             fontWeight="bold"
-            px="7"
+            px="8"
             fontSize="lg"
           >
             Today's crypto currency update in GBP
