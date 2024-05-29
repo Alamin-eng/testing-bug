@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text, Heading } from "@chakra-ui/react";
+import { Box, Text, Heading, background } from "@chakra-ui/react";
 
 export default function Header() {
   const outerBoxStyles = {
@@ -7,7 +7,7 @@ export default function Header() {
     height: "280px",
     p: "10",
     background:
-      "url(https://transitnet.io/wp-content/uploads/what-does-title-company-do-crypto.jpg) bottom/cover no-repeat",
+      "url(https://www.acquisition-international.com/wp-content/uploads/2020/12/bitcoin.jpg) center/cover no-repeat",
   };
 
   return (
