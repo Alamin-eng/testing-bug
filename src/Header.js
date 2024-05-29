@@ -13,7 +13,7 @@ export default function Header() {
   return (
     <header>
       <Box sx={outerBoxStyles} className="App-header">
-        <Box filter="auto" brightness="95%">
+        <Box filter="auto" brightness="99%">
           <Text
             bgGradient="linear(to-l, #1221AA, #AE10E0)"
             bgClip="text"
