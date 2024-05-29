@@ -20,7 +20,7 @@ export default function Header() {
             fontSize="6xl"
             fontWeight="extrabold"
             filter="auto"
-            brightness="75%"
+            brightness="80%"
           >
             <Heading size="2xl">TOP 100 CRYPTO</Heading>
           </Text>
