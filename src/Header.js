@@ -1,13 +1,16 @@
 import React from "react";
-import { Box, Text, Heading, background } from "@chakra-ui/react";
+import { Box, Text, Heading } from "@chakra-ui/react";
+import backgroundImage from "./bitcoin.jpg";
 
 export default function Header() {
   const outerBoxStyles = {
-    boxSize: "full",
+    width: "100%",
     height: "280px",
-    p: "10",
-    background:
-      "url(https://www.acquisition-international.com/wp-content/uploads/2020/12/bitcoin.jpg) center/cover no-repeat",
+    padding: "10px",
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
   };
 
   return (
