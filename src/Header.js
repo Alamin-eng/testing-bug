@@ -7,10 +7,11 @@ export default function Header() {
     width: "100%",
     height: "280px",
     padding: "10px",
-    backgroundImage: `url(${backgroundImage})`,
+    backgroundImage: `linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, 0.6)), url(${backgroundImage})`,
     backgroundPosition: "center",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
+    backgroundBlendMode: "overly",
   };
 
   return (
